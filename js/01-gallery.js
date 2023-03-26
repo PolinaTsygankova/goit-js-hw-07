@@ -19,8 +19,6 @@ function addImagesItems(galleryItems) {
       .join("");
 }
 
-// натискаємо тільки на фотографію (перевірка іф), і потім добавляємо та знімаємо на фото, бекграунд або ескейп
-
 gallery.addEventListener("click", onImgClick);
 
 function onImgClick(evt) {
@@ -36,6 +34,8 @@ function onImgClick(evt) {
          .show();
    }
 }
+
+// Підкажіть, будь-ласка, як зробити закриття картинки по Ecs😀
 
 document.addEventListener("keydown", onImgClickClose);
 
