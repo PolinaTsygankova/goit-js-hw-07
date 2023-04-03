@@ -29,22 +29,23 @@ function onImgClick(evt) {
    } else {
       const photoLink = evt.target.dataset.source;
 
-      const instance = basicLightbox
-         .create(`<img width="1400" height="900" src=${photoLink}>`)
-         .show();
-   }
-}
-
-// Підкажіть, будь-ласка, як зробити закриття картинки по Ecs😀
-
-document.addEventListener("keydown", onImgClickClose);
-
-function onImgClickClose(evt) {
-   if (evt.code === "Escape") {
-      const photoLink = evt.target.dataset.source;
-
-      basicLightbox
-         .create(`<img width="1400" height="900" src=${photoLink}>`)
-         .close();
+      const instance = basicLightbox.create(
+         `<img width="1400" height="900" src=${photoLink}>`,
+         {
+            onShow: (instance) => {
+               document.addEventListener(
+                  "keydown",
+                  (evt) => {
+                     if (evt.code === "Escape") {
+                        // console.log('find')
+                        instance.close();
+                     }
+                  },
+                  { once: true }
+               );
+            },
+         }
+      );
+      instance.show();
    }
 }
