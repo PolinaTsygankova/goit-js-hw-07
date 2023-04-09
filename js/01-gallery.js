@@ -29,57 +29,24 @@ function onImgClick(evt) {
       return;
    }
 
-   const instance = basicLightbox.create(
-      `<img width="1400" height="900" src=${photoLink}>`
-   );
-   instance.show();
-
    function onImgClose(evt) {
       if (evt.code === "Escape") {
          instance.close();
       }
    }
-   gallery.addEventListener("keydown", onImgClose);
+
+   const instance = basicLightbox.create(
+      `
+		<img width="1400" height="900" src=${photoLink}>
+        `,
+      {
+         onShow: (instance) => {
+            window.addEventListener("keydown", onImgClose);
+         },
+         onClose: (instance) => {
+            window.removeEventListener("keydown", onImgClose);
+         },
+      }
+   );
+   instance.show();
 }
-
-//       const instance = basicLightbox
-//          .create(
-//             `<img width="1400" height="900" src=${photoLink}>`,
-
-//             {
-//                onShow: (instance) => console.log("onShow", instance),
-//                onClose: (instance) => console.log("onClose", instance),
-//             }
-//          )
-//          .show();
-
-//       function onCloseClick(evt) {
-//          if (evt.code === "Escape") {
-//             instance.close();
-//          }
-//       }
-
-//       onShow.addEventListener("keydown", onCloseClick);
-
-//       onClose.removeEventListener("keydown", onCloseClick);
-//    }
-// }
-
-// const instance = basicLightbox.create(
-//    `<img width="1400" height="900" src=${photoLink}>`,
-//    {
-//       onShow: (instance) => {
-//          document.addEventListener(
-//             "keydown",
-//             (evt) => {
-//                if (evt.code === "Escape") {
-//                   // console.log('find')
-//                   instance.close();
-//                }
-//             },
-//             { once: true }
-//          );
-//       },
-//    }
-// );
-// instance.show();
